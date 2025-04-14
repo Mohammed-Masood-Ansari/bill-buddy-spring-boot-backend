@@ -1,0 +1,14 @@
+server:
+  port: 8182
+spring:
+  application:
+    name: split-with-room-mates
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/pay-with-roommates
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
