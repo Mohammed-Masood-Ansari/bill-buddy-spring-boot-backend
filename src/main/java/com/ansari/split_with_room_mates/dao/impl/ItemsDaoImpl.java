@@ -61,6 +61,7 @@ public class ItemsDaoImpl implements ItemsDao {
 				Owe owe = oweRepository.findByBorrowUserId(user2.getId());
 
 				if (owe != null) {
+					
 					owe.setLendmoney(price + owe.getLendmoney());
 					owe.setUser(user);
 					owe.setBorrowUserId(user2.getId());
@@ -73,6 +74,8 @@ public class ItemsDaoImpl implements ItemsDao {
 
 					oweRepository.save(owe1);
 				}
+			}else {
+				System.out.println("present");
 			}
 		}
 
