@@ -8,8 +8,10 @@ public interface RoomMatesDao {
 	
 	public Rooms saveRoomMatesDao(Rooms rooms);
 	
-	public String addRoomMatesDao(String userEmail,String roomName);
+	public Rooms addRoomMatesDao(String userEmail,String roomName);
 	
 	Rooms findByroomNameDao(String roomName);
+	
+	List<Rooms> getAllRoomMatesDao();
 	
 }

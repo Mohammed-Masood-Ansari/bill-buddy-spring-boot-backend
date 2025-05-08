@@ -36,15 +36,19 @@ public class RoomMatesController {
 	public List<Rooms> saveRoomMatesController() {
 		System.out.println("get All room api called");
 		List<Rooms> rooms=roomDao.getAllRoomsDao();
-		
 		System.out.println(rooms);
-		
 		return rooms;
 	}
 
 	@GetMapping(value = "/addRoomMates/{userEmail}/{roomName}")
 	public String addRoomMatesController(@PathVariable(name = "userEmail") String userEmail,
 			@PathVariable(name = "roomName") String roomName) {
-		return matesDao.addRoomMatesDao(userEmail, roomName);
+	     Rooms rooms= matesDao.addRoomMatesDao(userEmail, roomName);
+	     
+	     if(rooms!=null) {
+	    	 return "Added";
+	     }else {
+	    	 return "already added";
+	     }
 	}
 }

@@ -29,7 +29,7 @@ public class RoomMatesDaoImpl implements RoomMatesDao {
 	}
 
 	@Override
-	public String addRoomMatesDao(String userEmail, String roomName) {
+	public Rooms addRoomMatesDao(String userEmail, String roomName) {
 		
 		User user = userDao.findByEmailDao(userEmail);
 		
@@ -37,7 +37,7 @@ public class RoomMatesDaoImpl implements RoomMatesDao {
 		
 		roomMatesRepository.addRoomMates(roomMates.getId(),user.getId());
 		
-		return "added";
+		return roomMates;
 	}
 
 	@Override
