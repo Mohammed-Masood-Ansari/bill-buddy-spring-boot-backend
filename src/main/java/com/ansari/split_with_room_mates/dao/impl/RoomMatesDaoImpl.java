@@ -35,7 +35,8 @@ public class RoomMatesDaoImpl implements RoomMatesDao {
 		
 		Rooms roomMates = findByroomNameDao(roomName);
 		
-		if(user.getId()!=roomMates.getId()) {
+		
+		if(roomMates==null) {
 			roomMatesRepository.addRoomMates(roomMates.getId(),user.getId());
 			return roomMates;
 		}else {
