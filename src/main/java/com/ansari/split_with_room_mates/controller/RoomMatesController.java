@@ -43,12 +43,14 @@ public class RoomMatesController {
 	@GetMapping(value = "/addRoomMates/{userEmail}/{roomName}")
 	public String addRoomMatesController(@PathVariable(name = "userEmail") String userEmail,
 			@PathVariable(name = "roomName") String roomName) {
+		
 	     Rooms rooms= matesDao.addRoomMatesDao(userEmail, roomName);
 	     
 	     if(rooms!=null) {
-	    	 return "Added";
+	    	 return "added";
 	     }else {
-	    	 return "already added";
+	    	 return "already exist";
 	     }
+	    
 	}
 }

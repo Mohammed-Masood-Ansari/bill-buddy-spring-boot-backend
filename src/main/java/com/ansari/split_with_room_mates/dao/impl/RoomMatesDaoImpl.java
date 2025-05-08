@@ -35,14 +35,23 @@ public class RoomMatesDaoImpl implements RoomMatesDao {
 		
 		Rooms roomMates = findByroomNameDao(roomName);
 		
-		roomMatesRepository.addRoomMates(roomMates.getId(),user.getId());
-		
-		return roomMates;
+		if(user.getId()!=roomMates.getId()) {
+			roomMatesRepository.addRoomMates(roomMates.getId(),user.getId());
+			return roomMates;
+		}else {
+			return null;
+		}
 	}
 
 	@Override
 	public Rooms findByroomNameDao(String roomName) {
 		return roomMatesRepository.findByroomName(roomName);
+	}
+
+	@Override
+	public List<Rooms> getAllRoomMatesDao() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
