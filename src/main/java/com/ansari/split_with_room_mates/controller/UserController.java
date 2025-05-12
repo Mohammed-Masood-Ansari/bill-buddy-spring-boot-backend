@@ -1,5 +1,9 @@
 package com.ansari.split_with_room_mates.controller;
 
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,24 +36,39 @@ public class UserController {
 	 */
 	@PostMapping(value = "/saveUser")
 	public User saveUserController(@RequestBody User user) {
+		
 		return userDao.saveUserDao(user);
 	}
 
 	@GetMapping(value = "/loginUser/{userEmail}/{userPass}")
-	public User loginWithUserController(@PathVariable(name = "userEmail") String userEmail,
+	public ResponseEntity<?> loginWithUserController(@PathVariable(name = "userEmail") String userEmail,
 			@PathVariable(name = "userPass") String userPass) {
 		
+		System.out.println("login user !!!");
+		
 		User user = userDao.findByEmailDao(userEmail);
+		
+		if(user!=null&&user.getPassword().equals(userPass)) {
+			
+			httpSession.setAttribute("userSession", user.getEmail());
+			
+			return ResponseEntity.ok(Map.of("message","Login Success","userEmail",user.getEmail()));
+		}	
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
+	}
+	
+	@GetMapping(value = "/userLogout")
+	public ResponseEntity<?> userLogout() {
+		
+		System.out.println("logout user !!!");
+		
+		String email = (String) httpSession.getAttribute("userSession");
 
-		if (user != null) {
-			if (user.getPassword().equals(userPass)) {
-				httpSession.setAttribute("userSession", user.getEmail());
-				return user;
-			} else {
-				return null;
-			}
-		} else {
-			return null;
-		}
+		
+		if(email!=null) {
+			httpSession.invalidate();
+			return ResponseEntity.ok(Map.of("message"," Logout Success ","userEmail",email));
+		}	
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("user already logout");
 	}
 }

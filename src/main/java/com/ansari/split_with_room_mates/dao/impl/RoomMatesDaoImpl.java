@@ -20,9 +20,9 @@ import lombok.AllArgsConstructor;
 public class RoomMatesDaoImpl implements RoomMatesDao {
 
 	private RoomMatesRepository roomMatesRepository;
-	
+
 	private UserDao userDao;
-	
+
 	@Override
 	public Rooms saveRoomMatesDao(Rooms roomMates) {
 		return roomMatesRepository.save(roomMates);
@@ -30,18 +30,12 @@ public class RoomMatesDaoImpl implements RoomMatesDao {
 
 	@Override
 	public Rooms addRoomMatesDao(String userEmail, String roomName) {
-		
 		User user = userDao.findByEmailDao(userEmail);
-		
 		Rooms roomMates = findByroomNameDao(roomName);
-		
-		
-		if(roomMates==null) {
-			roomMatesRepository.addRoomMates(roomMates.getId(),user.getId());
-			return roomMates;
-		}else {
-			return null;
-		}
+
+		roomMatesRepository.addRoomMates(roomMates.getId(), user.getId());
+
+		return roomMates;
 	}
 
 	@Override

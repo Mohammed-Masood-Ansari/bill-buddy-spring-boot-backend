@@ -1,5 +1,7 @@
 package com.ansari.split_with_room_mates.dao.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
 import com.ansari.split_with_room_mates.dao.UserDao;
@@ -21,8 +23,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findByEmailDao(String userEmail) {
-		User user=repository.findByEmail(userEmail);
-		return user;
+		Optional<User> user=repository.findByEmail(userEmail);
+		return user.isPresent()?user.get():null;
 	}
 
 }
