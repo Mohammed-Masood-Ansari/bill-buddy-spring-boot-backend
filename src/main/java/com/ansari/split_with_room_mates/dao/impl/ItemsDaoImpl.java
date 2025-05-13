@@ -155,4 +155,9 @@ public class ItemsDaoImpl implements ItemsDao {
 		return itemsRepository.save(items);
 	}
 
+	@Override
+	public List<Items> findItemsByRoomAndUsers(int roomId, List<Integer> userId) {
+		return itemsRepository.findByRooms_IdAndUser_IdIn(roomId, userId);
+	}
+
 }

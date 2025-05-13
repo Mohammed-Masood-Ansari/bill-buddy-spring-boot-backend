@@ -60,6 +60,12 @@ public class RoomMatesController {
 		rooms.setUsers(List.of(user));
 
 		Rooms room = matesDao.saveRoomMatesDao(rooms);
+		
+		user.setRooms(rooms);
+		/**
+		 * it will update the room id in user table
+		 */
+		dao.saveUserDao(user);
 
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(Map.of("message", "Room Created", "roomId", room.getId()));
@@ -109,6 +115,16 @@ public class RoomMatesController {
 		}
 
 		Rooms rooms = matesDao.addRoomMatesDao(userEmail, roomName);
+		
+		/**
+		 * we are setting rooms id in user
+		 */
+		user.setRooms(rooms);
+		
+		/**
+		 * this will update the room in user table
+		 */
+		dao.saveUserDao(user);
 
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(Map.of("message", "user added in group", "userEmail", userEmail));
