@@ -1,16 +1,23 @@
 package com.ansari.split_with_room_mates.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Items {
 
 	@Id
@@ -20,9 +27,11 @@ public class Items {
 	private double price;
 	
 	@ManyToOne
+	@JsonIgnore  // Ignore the user field during serialization
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "roomsid")
+	@JsonIgnore  // Ignore the rooms field during serialization
 	private Rooms rooms;
 }

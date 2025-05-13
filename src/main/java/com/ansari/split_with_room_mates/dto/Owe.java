@@ -2,6 +2,8 @@ package com.ansari.split_with_room_mates.dto;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Owe {
 	
 	@ManyToOne
 	@JoinColumn(name = "lent_userid")
+	@JsonIgnore  // Optionally ignore the user field during serialization
 	private User user;
 
 }

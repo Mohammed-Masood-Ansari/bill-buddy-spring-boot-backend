@@ -156,8 +156,8 @@ public class ItemsDaoImpl implements ItemsDao {
 	}
 
 	@Override
-	public List<Items> findItemsByRoomAndUsers(int roomId, List<Integer> userId) {
-		return itemsRepository.findByRooms_IdAndUser_IdIn(roomId, userId);
+	public List<Items> findByRoomsIdDao(int roomId) {
+		return itemsRepository.findItemsByRoomId(roomId);
 	}
 
 }
