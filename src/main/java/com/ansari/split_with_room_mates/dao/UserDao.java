@@ -8,4 +8,6 @@ public interface UserDao {
 	
 	public User findByEmailDao(String userEmail);
 	
+	public User findByUserIdDao(int userId);
+	
 }

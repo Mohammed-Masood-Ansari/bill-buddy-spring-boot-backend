@@ -9,4 +9,5 @@ import com.ansari.split_with_room_mates.dto.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByEmail(String userEmail);
+	
 }

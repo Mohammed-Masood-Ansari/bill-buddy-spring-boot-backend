@@ -27,4 +27,15 @@ public class UserDaoImpl implements UserDao {
 		return user.isPresent()?user.get():null;
 	}
 
+	@Override
+	public User findByUserIdDao(int userId) {
+		
+		Optional<User> optional = repository.findById(userId);
+		
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+	}
+
 }
