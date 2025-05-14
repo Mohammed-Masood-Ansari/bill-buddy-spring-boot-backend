@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping(value = "/roomMates")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
 public class RoomMatesController {
 
 	private RoomMatesDao matesDao;
@@ -106,16 +106,8 @@ public class RoomMatesController {
 					.body(Map.of("message", "user not found", "userEmail", userEmail));
 		}
 
-		Optional<Rooms> optional = matesRepository.findRoomByUserId(user.getId());
-
-		if (optional.isPresent()) {
-
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("status", "409", "error", "conflict",
-					"message", "user already exist", "userEmail", userEmail));
-		}
-
-		Rooms rooms = matesDao.addRoomMatesDao(userEmail, roomName);
 		
+		Rooms rooms = matesRepository.findByroomName(roomName);
 		/**
 		 * we are setting rooms id in user
 		 */
