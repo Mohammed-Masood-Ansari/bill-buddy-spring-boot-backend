@@ -1,5 +1,6 @@
 package com.ansari.split_with_room_mates.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ public class Items {
 	private double price;
 	
 	@ManyToOne
-	@JsonIgnore  // Ignore the user field during serialization
+	@JsonBackReference   // Ignore the user field during serialization
 	private User user;
 	
 	@ManyToOne
