@@ -86,4 +86,15 @@ public class UserController {
 		}
 		return ResponseEntity.ok(Map.of("message","user not found because sesssion is not working please login then try"));
 	}
+	
+	@GetMapping(value = "/getUserName")
+	public User getUserNameController(){
+		String email = (String) httpSession.getAttribute("userSession");
+		if(email!=null) {
+			User user = userDao.findByEmailDao(email);
+			
+			return user;
+		}
+		return null;
+	}
 }
